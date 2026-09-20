@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revise Plan & Tracker</title>
+    <!-- Dynamic Favicon -->
+    <link id="dynamic-favicon" rel="icon" type="image/jpeg" href="https://placehold.co/128x128/059669/ffffff?text=RP">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&family=Noto+Sans+Sinhala:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #059669;
+            --primary-dark: #065f46;
+            --header-bg: #ecfdf5;
+            --header-text: #064e3b;
+            --border-color: #a7f3d0;
+            --border-dark: #047857;
+            --row-alt-bg: #f0fdf4;
+            --text-main: #0f172a;
+            --accent-pill: #d1fae5;
+        }
+
+        /* Themes */
+        body.theme-emerald {
+            --primary-color: #059669;
+            --primary-dark: #065f46;
+            --header-bg: #ecfdf5;
+            --header-text: #064e3b;
+            --border-color: #a7f3d0;
+            --border-dark: #047857;
+            --row-alt-bg: #f0fdf4;
+            --accent-pill: #d1fae5;
+        }
+
+        body.theme-blue {
+            --primary-color: #2563eb;
+            --primary-dark: #1e40af;
+            --header-bg: #eff6ff;
+            --header-text: #1e3a8a;
+            --border-color: #bfdbfe;
+            --border-dark: #1d4ed8;
+            --row-alt-bg: #f0f7ff;
+            --accent-pill: #dbeafe;
+        }
+
+        body.theme-pink {
+            --primary-color: #db2777;
+            --primary-dark: #9d174d;
+            --header-bg: #fdf2f8;
+            --header-text: #831843;
+            --border-color: #fbcfe8;
+            --border-dark: #be185d;
+            --row-alt-bg: #fdf2f8;
+            --accent-pill: #fce7f3;
+        }
+
+        body.theme-indigo {
+            --primary-color: #4f46e5;
+            --primary-dark: #3730a3;
+            --header-bg: #eef2ff;
+            --header-text: #312e81;
+            --border-color: #c7d2fe;
+            --border-dark: #4338ca;
+            --row-alt-bg: #f5f3ff;
+            --accent-pill: #e0e7ff;
+        }
+
+        body.theme-slate {
+            --primary-color: #475569;
+            --primary-dark: #1e293b;
+            --header-bg: #f1f5f9;
+            --header-text: #0f172a;
+            --border-color: #cbd5e1;
+            --border-dark: #334155;
+            --row-alt-bg: #f8fafc;
+            --accent-pill: #e2e8f0;
+        }
+
+        @page {
+            size: A4 portrait;
+            margin: 5mm;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', 'Inter', 'Noto Sans Sinhala', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f1f5f9;
+            color: var(--text-main);
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+            font-weight: 600;
+        }
+
+        .no-print-bar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(15, 23, 42, 0.94);
+            backdrop-filter: blur(8px);
+            color: white;
+            padding: 12px 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .bar-title {
+            font-weight: 800;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .bar-controls {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 8px 14px;
+            font-size: 13px;
+            font-weight: 700;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-primary {
+            background-color: #2563eb;
+            color: white;
+            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background-color: #334155;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #475569;
+        }
+
+        .btn-info {
+            background-color: #0284c7;
+            color: white;
+        }
+
+        .btn-info:hover {
+            background-color: #0369a1;
+        }
+
+        .theme-select {
+            padding: 7px 10px;
+            border-radius: 6px;
+            border: 1px solid #475569;
+            background: #1e293b;
+            color: white;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .progress-pill {
+            background: #1e293b;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            border: 1px solid #334155;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .page-wrapper {
+            padding: 15px 0 30px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            padding: 7mm 8mm 6mm 8mm;
+            background: white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            border-radius: 2px;
+            page-break-after: always;
+            page-break-inside: avoid;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plan-header {
+            border-bottom: 2.5px solid var(--primary-color);
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+        }
+
+        .header-main-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title-group {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .editable-title {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: var(--primary-dark);
+            text-transform: uppercase;
+            outline: none;
+        }
+
+        .subject-tag, .name-tag {
+            font-size: 12px;
+            font-weight: 800;
+            color: #334155;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .editable-subject, .editable-name {
+            font-weight: 800;
+            color: var(--primary-dark);
+            border-bottom: 1.5px dashed var(--primary-color);
+            padding: 0 6px;
+            outline: none;
+            display: inline-block;
+        }
+
+        .editable-subject {
+            min-width: 100px;
+        }
+
+        .editable-name {
+            min-width: 160px;
+        }
+
+        .header-sub-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-top: 4px;
+        }
+
+        .page-badge {
+            background-color: var(--accent-pill);
+            color: var(--primary-dark);
+            font-size: 11px;
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            flex-grow: 1;
+        }
+
+        .table-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9px;
+            table-layout: fixed;
+        }
+
+        th {
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            font-weight: 800;
+            border: 1px solid var(--border-dark);
+            padding: 4px 1px;
+            font-size: 8.5px;
+            text-align: center;
+        }
+
+        td {
+            border: 1px solid var(--border-color);
+            text-align: center;
+            padding: 0;
+            height: 23px;
+            vertical-align: middle;
+            font-weight: 700;
+        }
+
+        tr:nth-child(even) {
+            background-color: var(--row-alt-bg);
+        }
+
+        .num-col {
+            width: 20%;
+            font-weight: 800;
+            background-color: #f8fafc;
+            color: #0f172a;
+            font-size: 9.5px;
+            border-right: 1.5px solid var(--border-dark) !important;
+        }
+
+        .day-col {
+            width: 8%;
+            position: relative;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .day-box {
+            width: 9.5px;
+            height: 9.5px;
+            border: 1.2px solid #64748b;
+            border-radius: 2px;
+            margin: 0 auto;
+            transition: all 0.15s ease;
+        }
+
+        .day-col.checked .day-box {
+            background-color: var(--primary-color);
+            border-color: var(--primary-dark);
+            position: relative;
+        }
+
+        .day-col.checked .day-box::after {
+            content: '✓';
+            color: white;
+            font-size: 8px;
+            font-weight: 900;
+            position: absolute;
+            top: -3.5px;
+            left: 0px;
+        }
+
+        .plan-footer {
+            margin-top: 6px;
+            padding-top: 4px;
+            border-top: 1.5px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 8.5px;
+            font-weight: 700;
+            color: #475569;
+        }
+
+        .footer-quote {
+            font-style: italic;
+            font-weight: 800;
+            color: var(--primary-dark);
+            letter-spacing: 0.3px;
+        }
+
+        .footer-tracker {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(5px);
+            z-index: 200;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            background: white;
+            border-radius: 16px;
+            width: 92%;
+            max-width: 860px;
+            max-height: 88vh;
+            overflow-y: auto;
+            padding: 26px;
+            box-shadow: 0 25px 30px -5px rgba(0, 0, 0, 0.25);
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            font-weight: 800;
+            cursor: pointer;
+            color: #64748b;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .guide-subtitle {
+            font-size: 13px;
+            color: #334155;
+            margin-top: 0;
+            margin-bottom: 20px;
+            line-height: 1.65;
+            background: #f8fafc;
+            padding: 14px 18px;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-color);
+            font-weight: 600;
+        }
+
+        .section-heading {
+            font-size: 16px;
+            font-weight: 800;
+            color: #0f172a;
+            margin: 24px 0 14px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        .spaced-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .spaced-step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background: #ffffff;
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            transition: all 0.2s ease;
+        }
+
+        .spaced-step-item:hover {
+            border-color: var(--primary-color);
+            background: #f0fdf4;
+        }
+
+        .step-badge {
+            background: var(--primary-color);
+            color: white;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 6px;
+            white-space: nowrap;
+            letter-spacing: 0.3px;
+        }
+
+        .step-text {
+            font-size: 12.5px;
+            color: #1e293b;
+            margin: 0;
+            line-height: 1.55;
+            font-weight: 600;
+        }
+
+        .techniques-container {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin-bottom: 20px;
+        }
+
+        .detailed-tech-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.03);
+            transition: all 0.2s ease;
+        }
+
+        .detailed-tech-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+        }
+
+        .detailed-tech-card.highlight {
+            background: #fafdfb;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .tech-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #cbd5e1;
+        }
+
+        .tech-card-icon {
+            font-size: 24px;
+            background: var(--header-bg);
+            padding: 8px 12px;
+            border-radius: 10px;
+        }
+
+        .tech-card-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        .tech-card-subtitle {
+            font-size: 11.5px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        .tech-block {
+            margin-top: 12px;
+        }
+
+        .tech-block-label {
+            font-size: 12.5px;
+            font-weight: 800;
+            color: #0f172a;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 6px;
+            background: #f1f5f9;
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+
+        .tech-block-desc {
+            font-size: 13px;
+            color: #334155;
+            line-height: 1.65;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .tech-steps-list {
+            margin: 8px 0 0 0;
+            padding-left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .tech-steps-list li {
+            font-size: 12.5px;
+            color: #1e293b;
+            line-height: 1.6;
+            font-weight: 600;
+        }
+
+        .tech-steps-list li b {
+            color: var(--primary-dark);
+        }
+
+        .tech-pro-tip {
+            margin-top: 12px;
+            background: #fffbeb;
+            border-left: 3px solid #f59e0b;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #78350f;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        /* Responsive */
+        @media screen and (max-width: 768px) {
+            .no-print-bar {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 10px 12px;
+                gap: 8px;
+            }
+            .bar-controls {
+                justify-content: space-between;
+                width: 100%;
+            }
+            .page-wrapper {
+                padding: 10px 8px;
+            }
+            .page {
+                width: 100%;
+                max-width: 100%;
+                height: auto;
+                padding: 12px 10px;
+                border-radius: 8px;
+            }
+            .grid-container {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+            td { height: 32px; }
+            .day-box { width: 13px; height: 13px; }
+            .day-col.checked .day-box::after {
+                font-size: 9px;
+                top: -2.5px;
+                left: 1px;
+            }
+            .modal-card {
+                padding: 16px;
+            }
+        }
+
+        @media print {
+            body { background: white; }
+            .no-print-bar, .modal-overlay { display: none !important; }
+            .page-wrapper { padding: 0; gap: 0; }
+            .page {
+                box-shadow: none;
+                margin: 0;
+                width: 100% !important;
+                height: 100vh !important;
+                padding: 6mm 8mm !important;
+                border-radius: 0;
+            }
+            .grid-container {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 12px !important;
+            }
+            td { height: 23px !important; }
+            .day-box { width: 9.5px !important; height: 9.5px !important; }
+            .day-col.checked .day-box::after {
+                font-size: 8px !important;
+                top: -3.5px !important;
+                left: 0px !important;
+            }
+        }
+    </style>
+</head>
+<body class="theme-emerald">
+
+    <div class="no-print-bar">
+        <div class="bar-title">
+            <span>📅 Revise Plan & Tracker</span>
+            <span class="progress-pill" id="progressPill">Progress: 0 / 2220 (0%)</span>
+        </div>
+        <div class="bar-controls">
+            <select id="themeSelect" class="theme-select" onchange="changeTheme(this.value)">
+                <option value="theme-emerald">Emerald Green</option>
+                <option value="theme-blue">Ocean Blue</option>
+                <option value="theme-pink">Rose Pink</option>
+                <option value="theme-indigo">Indigo</option>
+                <option value="theme-slate">Classic Slate</option>
+            </select>
+            <button class="btn btn-info" onclick="openGuideModal()">💡 Revise Guide</button>
+            <button class="btn btn-secondary" onclick="resetCheckmarks()">Reset Checks</button>
+            <button class="btn btn-primary" onclick="window.print()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                Save as PDF / Print
+            </button>
+        </div>
+    </div>
+
+    <div class="page-wrapper">
+
+        <!-- PAGE 1 -->
+        <div class="page">
+            <div>
+                <div class="plan-header">
+                    <div class="header-main-row">
+                        <div class="header-title-group">
+                            <div class="editable-title" contenteditable="true">REVISE PLAN</div>
+                            <div class="header-sub-row">
+                                <div class="subject-tag">SUBJECT: <span class="editable-subject" contenteditable="true" oninput="syncSubject(this.innerText)">....................</span></div>
+                                <div class="name-tag">NAME: <span class="editable-name" contenteditable="true" oninput="syncName(this.innerText)">....................</span></div>
+                            </div>
+                        </div>
+                        <div class="page-badge">PART 1</div>
+                    </div>
+                </div>
+
+                <div class="grid-container">
+                    <div class="table-section" id="sec-1"></div>
+                    <div class="table-section" id="sec-2"></div>
+                </div>
+            </div>
+
+            <div class="plan-footer">
+                <div class="footer-quote">"Consistency is the secret to mastery."</div>
+                <div class="footer-tracker">
+                    <div>Page 1 of 3</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 2 -->
+        <div class="page">
+            <div>
+                <div class="plan-header">
+                    <div class="header-main-row">
+                        <div class="header-title-group">
+                            <div class="editable-title" contenteditable="true">REVISE PLAN</div>
+                        </div>
+                        <div class="page-badge">PART 2</div>
+                    </div>
+                </div>
+
+                <div class="grid-container">
+                    <div class="table-section" id="sec-3"></div>
+                    <div class="table-section" id="sec-4"></div>
+                </div>
+            </div>
+
+            <div class="plan-footer">
+                <div class="footer-quote">"Consistency is the secret to mastery."</div>
+                <div class="footer-tracker">
+                    <div>Page 2 of 3</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 3 -->
+        <div class="page">
+            <div>
+                <div class="plan-header">
+                    <div class="header-main-row">
+                        <div class="header-title-group">
+                            <div class="editable-title" contenteditable="true">REVISE PLAN</div>
+                        </div>
+                        <div class="page-badge">PART 3</div>
+                    </div>
+                </div>
+
+                <div class="grid-container">
+                    <div class="table-section" id="sec-5"></div>
+                    <div class="table-section" id="sec-6"></div>
+                </div>
+            </div>
+
+            <div class="plan-footer">
+                <div class="footer-quote">"Consistency is the secret to mastery."</div>
+                <div class="footer-tracker">
+                    <div>Page 3 of 3</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Revise Guide Modal -->
+    <div class="modal-overlay" id="guideModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div class="modal-title">🧠 Revise Guide - Effective Study Techniques</div>
+                <button class="modal-close" onclick="closeGuideModal()">&times;</button>
+            </div>
+            
+            <p class="guide-subtitle">
+                ලොව විශිෂ්ටතම පර්යේෂකයන් මගින් තහවුරු කළ <b>Effective Study Techniques</b> සහ <b>10-Day Spaced Repetition Cycle</b> නිවැරදිව භාවිත කරමින් ඔබේ මතකය 300%කින් වර්ධනය කරගන්නා ආකාරය පහත දැක්වේ:
+            </p>
+
+            <div class="section-heading">
+                <span>🗓️ දවස් 10 පුනරීක්ෂණ චක්‍රය (10-Day Revision Cycle)</span>
+            </div>
+
+            <div class="spaced-steps">
+                <div class="spaced-step-item">
+                    <span class="step-badge">Day 1</span>
+                    <p class="step-text"><b>මුලික අධ්‍යයනය සහ සාරාංශ කිරීම (Initial Deep Learning):</b> පාඩමේ තියරි කොටස් හොඳින් තේරුම් ගන්න. කෙටි සටහන් (Short Notes), රූපසටහන් හෝ Mind Maps සාදා ගන්න. <i>(Box 1 සලකුණු කරන්න)</i></p>
+                </div>
+                <div class="spaced-step-item">
+                    <span class="step-badge">Day 2</span>
+                    <p class="step-text"><b>පැය 24 සක්‍රීය මතක කැඳවීම (24-Hour Active Recall):</b> පොත හෝ සටහන් දෙස නොබලා, ඊයේ පාඩම් කළ කරුණු හිස් කොළයක ලියා හෝ මතකයෙන් සිහිපත් කර කෙටි කාලීන මතකය තහවුරු කරන්න. <i>(Box 2 සලකුණු කරන්න)</i></p>
+                </div>
+                <div class="spaced-step-item">
+                    <span class="step-badge">Day 3 - 5</span>
+                    <p class="step-text"><b>මධ්‍ය කාලීන පුහුණුව (Mid-Term Testing):</b> ප්‍රධාන සූත්‍ර, අර්ථදැක්වීම් සහ කෙටි ප්‍රශ්න Flashcards හෝ Quizzes මගින් නැවත නැවත මතක් කරන්න. <i>(Box 3–5 සලකුණු කරන්න)</i></p>
+                </div>
+                <div class="spaced-step-item">
+                    <span class="step-badge">Day 6 - 8</span>
+                    <p class="step-text"><b>Feynman ක්‍රමය මගින් පැහැදිලි කිරීම (Concept Refinement):</b> අමාරු කොටස් තවත් කෙනෙකුට හෝ තමන්ටම සරල බසින් ශබ්ද නඟා පැහැදිලි කරන්න. අමතක වූ තැන් නැවත පොත බලා නිරාකරණය කරගන්න. <i>(Box 6–8 සලකුණු කරන්න)</i></p>
+                </div>
+                <div class="spaced-step-item">
+                    <span class="step-badge">Day 9 - 10</span>
+                    <p class="step-text"><b>Past Paper ප්‍රගුණ කිරීම සහ පූර්ණ ප්‍රගතිය (Past Paper Mastery):</b> නියමිත කාලයට අදාළ පසුගිය විභාග ප්‍රශ්නවලට තනිවම පිළිතුරු ලියන්න. 90%+ ලකුණු ලැබෙන්නේ නම් පාඩම Master වී ඇත! <i>(Box 9–10 සලකුණු කරන්න)</i></p>
+                </div>
+            </div>
+
+            <div class="section-heading">
+                <span>⚡ Key Effective Study Techniques (විස්තරාත්මක අධ්‍යයන ක්‍රමවේද)</span>
+            </div>
+
+            <div class="techniques-container">
+
+                <!-- 1. Spaced Repetition -->
+                <div class="detailed-tech-card highlight">
+                    <div class="tech-card-header">
+                        <span class="tech-card-icon">🔁</span>
+                        <div>
+                            <div class="tech-card-title">1. Spaced Repetition (කාලාන්තර පුනරීක්ෂණය)</div>
+                            <div class="tech-card-subtitle">අමතක වීමේ වක්‍රය (Forgetting Curve) පරාජය කිරීම</div>
+                        </div>
+                    </div>
+                    <div class="tech-block">
+                        <div class="tech-block-label">📘 පැහැදිලි විස්තරය:</div>
+                        <p class="tech-block-desc">Hermann Ebbinghaus ගේ "Forgetting Curve" න්‍යායට අනුව, යම් නව පාඩමක් අධ්‍යයනය කර පැය 24ක් යද්දී එයින් 70%කට වඩා මතකයෙන් ගිලිහී යයි. එකම පාඩම එක දිගට පැය ගණනක් පාඩම් කරනවා වෙනුවට (Cramming), අමතක වීමට ආසන්න නිශ්චිත කාලාන්තර වලදී (Day 1, 2, 5, 10) නැවත නැවත මතක් කිරීම මගින් තොරතුරු කෙටිකාලීන මතකයේ (Short-term memory) සිට දීර්ඝකාලීන මතකයට (Long-term memory) ගබඩා වන අතර මොළයේ ස්නායු සන්නිවේදනය (Synaptic connections) ශක්තිමත් වේ.</p>
+                    </div>
+                    <div class="tech-block">
+                        <div class="tech-block-label">🎯 ප්‍රැක්ටිස් කරන ආකාරය:</div>
+                        <ol class="tech-steps-list">
+                            <li><b>Day 1 (මුල් අධ්‍යයනය):</b> පාඩම හොඳින් තේරුම් ගෙන කෙටි සටහන් (Short Notes), Mind Maps හෝ Flashcards සාදා ගන්න.</li>
+                            <li><b>Day 2 (පැය 24කට පසු):</b> විනාඩි 10-15ක් වෙන්කර පොත නොබලා ප්‍රධාන කරුණු හා සූත්‍ර මතක් කරමින් පළමු පුනරීක්ෂණය කරන්න.</li>
+                            <li><b>Day 5 (දින 3කට පසු):</b> ප්‍රධාන අර්ථදැක්වීම් සහ කෙටි ප්‍රශ්න මගින් දෙවන පුනරීක්ෂණය සිදුකරන්න.</li>
+                            <li><b>Day 10 (දින 5කට පසු):</b> අදාළ Past Paper ප්‍රශ්න විසඳමින් දීර්ඝකාලීන මතකය තහවුරු කරගන්න.</li>
+                        </ol>
+                    </div>
+                    <div class="tech-pro-tip">
+                        💡 <b>Pro Tip:</b> මෙම Tracker එකේ ඇති අංක 1 සිට 10 දක්වා කොටු භාවිත කරන්නේ මෙම Spaced Repetition කාලරාමුව නිවැරදිව පවත්වා ගැනීමටයි!
+                    </div>
+                </div>
+
+                <!-- 2. Active Recall -->
+                <div class="detailed-tech-card highlight">
+                    <div class="tech-card-header">
+                        <span class="tech-card-icon">🧠</span>
+                        <div>
+                            <div class="tech-card-title">2. Active Recall (සක්‍රීය මතක කැඳවීම)</div>
+                            <div class="tech-card-subtitle">මොළයට වෙහෙස දී මතකය පිටතට ගැනීම</div>
+                        </div>
+                    </div>
+                    <div class="tech-block">
+                        <div class="tech-block-label">📘 පැහැදිලි විස්තරය:</div>
+                        <p class="tech-block-desc">බොහෝ සිසුන් සිදුකරන "Passive Studying" (පොත නැවත නැවත කියවීම හෝ Highlight කිරීම) මගින් සිදුවන්නේ "Fluency Illusion" එකක් හෙවත් තමන්ට පාඩම පුළුවන් යැයි සිතෙන ව්‍යාජ හැඟීමක් ඇතිවීමයි. Active Recall යනු පොත වසා, මොළයට යම් වෙහෙසක් දී (Cognitive effort) මතකයේ තැන්පත් වී ඇති තොරතුරු සක්‍රීයව පිටතට ඇද ගැනීමේ ක්‍රමයයි. මෙය මොළයේ මතක සෙවුම් පථ (Retrieval pathways) වේගවත් කරයි.</p>
+                    </div>
+                    <div class="tech-block">
+                        <div class="tech-block-label">🎯 ප්‍රැක්ටිස් කරන ආකාරය:</div>
+                        <ol class="tech-steps-list">
+                            <li><b>Blurting Method:</b> පාඩම කියවීමෙන් පසු පොත සම්පූර්ණයෙන්ම වසා හිස් කොළයක් ගෙන මතකයේ ඇති සියලුම තියරි, රූපසටහන් හා සූත්‍ර කොළයේ ලියන්න.</li>
+                            <li><b>Closed-Book Q&A:</b> පාඩම කියවන අතරතුර තමන්ගෙන්ම ප්‍රශ්න සාදා (Questions Log) පසුව පොත වසා එම ප්‍රශ්නවලට පිළිතුරු සපයන්න.</li>
+                            <li><b>Active Flashcards:</b> Flashcard එකක ඉදිරිපස ප්‍රශ්නයද පසුපස පිළිතුරද ලියා, පිළිතුර නොබලා තමාගෙන්ම ප්‍රශ්න කරගන්න.</li>
+                            <li><b>Correction:</b> අවසානයේ පොත ඇර බලා හිස් කොළයේ ලියූ දේවල් සැසඳීමෙන් තමන්ට මගහැරුණු සහ වැරදුණු තැන් රතු පෑනකින් ලකුණු කරගන්න.</li>
+                        </ol>
+                    </div>
+                    <div class="tech-pro-tip">
+                        💡 <b>Pro Tip:</b> පාඩම් කිරීම යනු මොළයට තොරතුරු ඇතුළු කිරීම පමණක් නොවේ; මතකයෙන් තොරතුරු එළියට ඇද ගැනීමට මොළය පුහුණු කිරීමයි!
+                    </div>
+                </div>
+
+                <!-- 3. Pomodoro Technique -->
+                <div class="detailed-tech-card">
+                    <div class="tech-card-header">
+                        <span class="tech-card-icon">⏱️</span>
+                        <div>
+                            <div class="tech-card-title">3. Pomodoro Technique (පොමෝඩෝරෝ ක්‍රමය)</div>
+                            <div class="tech-card-subtitle">මොළයේ අවධානය 100%ක් තබා ගැනීම</div>
+                        </div>
+                    </div>
+                    <div class="tech-block">
+                        <div class="tech-block-label">📘 පැහැදිලි විස්තරය:</div>
+                        <p class="tech-block-desc">මිනිස් මොළයට එක දිගට උපරිම අවධානය (Sustained Attention) පවත්වා ගත හැක්කේ විනාඩි 20-30ත් අතර කාලයක් පමණි. පොමෝඩෝරෝ ක්‍රමයෙන් අධ්‍යයන කාලය කෙටි, ඉහළ කාර්යක්ෂමතාවයකින් යුතු කාල පරිච්ඡේද (Sessions) වලට කඩා වෙන්කරයි. මෙය මොළයේ වෙහෙස (Mental fatigue) වළක්වන අතර Procrastination (වැඩ කල් දැමීමේ පුරුද්ද) සම්පූර්ණයෙන්ම පාලනය කරයි.</p>
+                    </div>
+                    <div class="tech-block">
+                        <div class="tech-block-label">🎯 ප්‍රැක්ටිස් කරන ආකාරය:</div>
+                        <ol class="tech-steps-list">
+                            <li><b>Target Setup:</b> ලඟා කරගත යුතු එක නිශ්චිත ඉලක්කයක් තෝරාගන්න (උදා: ජෛව අණු පාඩමේ ප්‍රෝටීන කොටස අවසන් කිරීම).</li>
+                            <li><b>25-Min Focused Work:</b> දුරකථනය, සමාජ මාධ්‍ය සහ සියලු අවධානය වෙනතකට යොමුකරන දෑ අයින් කර ටයිමරයක් තබා විනාඩි 25ක් 100% අවධානයෙන් පාඩම් කරන්න.</li>
+                            <li><b>5-Min Short Break:</b> විනාඩි 25 අවසානයේ වහාම පාඩම නවත්වා විනාඩි 5ක විවේකයක් ගන්න (වතුර වීදුරුවක් බොන්න, ඇස් දෙකට විවේකයක් දෙන්න. Phone බලන්න එපා!).</li>
+                            <li><b>Long Break:</b> මෙවැනි Pomodoro Sessions 4ක් අවසන් වූ පසු (පැය 2කට පසු) විනාඩි 20-30ක දීර්ඝ විවේකයක් ගන්න.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- 4. Feynman Technique -->
+                <div class="detailed-tech-card">
+                    <div class="tech-card-header">
+                        <span class="tech-card-icon">🗣️</span>
+                        <div>
+                            <div class="tech-card-title">4. Feynman Technique (ෆෙයින්මන් ක්‍රමය)</div>
+                            <div class="tech-card-subtitle">සරලව අන් අයට පැහැදිලි කිරීම</div>
+                        </div>
+                    </div>
+                    <div class="tech-block">
+                        <div class="tech-block-label">📘 පැහැදිලි විස්තරය:</div>
+                        <p class="tech-block-desc">නොබෙල් තෑගි ලාභී භෞතික විද්‍යාඥ Richard Feynman විසින් හඳුන්වා දුන් මෙම ක්‍රමය "If you can't explain it simply, you don't understand it well enough" යන න්‍යාය මත පදනම් වේ. යම් පාඩමක ඇති සංකීර්ණ තියරි, කිසිදු පූර්ව දැනුමක් නැති අවුරුදු 12ක කුඩා ළමයෙකුට තේරෙන සරල බසින් පැහැදිලි කිරීමට උත්සාහ කිරීම මගින් ඔබේ අවබෝධයේ ඇති හිඩැස් (Knowledge gaps) ක්ෂණිකව අල්ලා ගත හැක.</p>
+                    </div>
+                    <div class="tech-block">
+                        <div class="tech-block-label">🎯 ප්‍රැක්ටිස් කරන ආකාරය:</div>
+                        <ol class="tech-steps-list">
+                            <li><b>Select Concept:</b> ඔබට අමාරු යැයි සිතෙන සංකීර්ණ මාතෘකාවක් තෝරාගන්න (උදා: Electromagnetic Induction).</li>
+                            <li><b>Teach to a Child / Self:</b> කිසිදු තාක්ෂණික වචන (Technical jargon) නැතිව, ඉතා සරල උපමා (Analogies) භාවිතා කරමින් තවත් කෙනෙකුට හෝ තමන්ටම ශබ්ද නඟා පැහැදිලි කරන්න.</li>
+                            <li><b>Identify Knowledge Gaps:</b> පැහැදිලි කිරීමේදී ඔබට හිරවන, පැහැදිලි කිරීමට නොහැකි වන හෝ තාක්ෂණික වචන පිටුපස සැඟවීමට සිදුවන තැන් හඳුනාගන්න.</li>
+                            <li><b>Refine & Simplify:</b> නැවත ප්‍රධාන පෙළපොත හෝ සටහන් වෙත ගොස් එම හිරවුණු කොටස නැවත අධ්‍යයනය කර, නැවත සරලව පැහැදිලි කරන තෙක් පුහුණු වන්න.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- 5. Parkinson's Law -->
+                <div class="detailed-tech-card">
+                    <div class="tech-card-header">
+                        <span class="tech-card-icon">⏳</span>
+                        <div>
+                            <div class="tech-card-title">5. Parkinson's Law (පාකින්සන්ගේ නීතිය)</div>
+                            <div class="tech-card-subtitle">තද Deadlines හරහා වැඩ ඉක්මන් කිරීම</div>
+                        </div>
+                    </div>
+                    <div class="tech-block">
+                        <div class="tech-block-label">📘 පැහැදිලි විස්තරය:</div>
+                        <p class="tech-block-desc">"Work expands so as to fill the time available for its completion" - යම් කාර්යයක් සඳහා ඔබ ලබාදෙන කාලය අනුව එම කාර්යය කිරීමට ගතවන කාලයද ඉබේම දීර්ඝ වේ. උදාහරණයකට, පාඩමකට දවසක් දුන්නොත් එය ඉවර කිරීමට දවසක්ම යයි; නමුත් පැය 1.5ක් දුන්නොත් එකඟ වූ කාලයට වඩා වැඩි අවධානයක් දී පැය 1.5න් එය නිමකළ හැක.</p>
+                    </div>
+                    <div class="tech-block">
+                        <div class="tech-block-label">🎯 ප්‍රැක්ටිස් කරන ආකාරය:</div>
+                        <ol class="tech-steps-list">
+                            <li><b>Artificial Time Limits:</b> සාමාන්‍යයෙන් පැය 3ක් යන පාඩමකට පැය 1.5ක කෘත්‍රිම කාල සීමාවක් (Artificial Deadline) තබා ගන්න.</li>
+                            <li><b>Timeboxing:</b> දෛනික වැඩසටහනේ සෑම කාර්යයකටම ආරම්භක සහ අවසාන වේලාවන් දැඩි ලෙස සටහන් කරගන්න (උදා: 7.00 PM - 8.15 PM Chemistry Essay Question).</li>
+                            <li><b>Eliminate Micro-Distractions:</b> දැඩි කාලරාමුව තුළ වැඩ කරන බැවින් නාස්ති කිරීමට කාලයක් නැතැයි මොළයට ඒත්තු ගන්වා උපරිම කාර්යක්ෂමතාවයකින් වැඩ කරන්න.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- 6. Past Paper Practice -->
+                <div class="detailed-tech-card">
+                    <div class="tech-card-header">
+                        <span class="tech-card-icon">✍️</span>
+                        <div>
+                            <div class="tech-card-title">6. Past Paper Practice (ප්‍රශ්න පත්‍ර ප්‍රගුණ කිරීම)</div>
+                            <div class="tech-card-subtitle">විභාග පරිසරයට සහ Marking Schemes වලට හුරු වීම</div>
+                        </div>
+                    </div>
+                    <div class="tech-block">
+                        <div class="tech-block-label">📘 පැහැදිලි විස්තරය:</div>
+                        <p class="tech-block-desc">තියරි පාඩම් කිරීම පමණක් විභාග සමත් වීමට ප්‍රමාණවත් නොවේ. විභාග මණ්ඩලය ප්‍රශ්න අසන ආකාරය, Marking Scheme (ලකුණු දීමේ පටිපාටිය), සහ Exam Pressure යටතේ කාල කළමනාකරණය ප්‍රගුණ කළ හැක්කේ පසුගිය විභාග ප්‍රශ්නවලට සක්‍රීයව මුහුණ දීමෙනි.</p>
+                    </div>
+                    <div class="tech-block">
+                        <div class="tech-block-label">🎯 ප්‍රැක්ටිස් කරන ආකාරය:</div>
+                        <ol class="tech-steps-list">
+                            <li><b>Timed Environment:</b> නියමිත විභාග වෙලාවටම ටයිමර් එක තබාගෙන, කිසිදු සටහනක් නොබලා විභාග ශාලාවක සිටිනවා මෙන් ප්‍රශ්න පත්‍රයට පිළිතුරු ලියන්න.</li>
+                            <li><b>Self-Correction using Marking Scheme:</b> පිළිතුරු ලියා අවසන් වූ පසු, Marking Scheme එක තබාගෙන රතු පෑනකින් තනිවම ලකුණු දෙන්න. Key words (ප්‍රධාන පද) අඩංගුදැයි පරීක්ෂා කරන්න.</li>
+                            <li><b>Error Log (වැරදි සටහන් පොත):</b> වැරදුණු සෑම ප්‍රශ්නයකටම හේතුව (තේරුම් ගැනීමේ වරදක්ද, සූත්‍රය අමතක වීමක්ද, කාලය මදි වීමක්ද) විශේෂ පොතක සටහන් කරගෙන එම තියරි කොටස නැවත පුනරීක්ෂණය කරන්න.</li>
+                        </ol>
+                    </div>
+                </div>
+
+            </div>
+
+            <div style="text-align: right; margin-top: 24px;">
+                <button class="btn btn-primary" onclick="closeGuideModal()">තේරුණා (Got It!)</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateFaviconColor(hexColor) {
+            const cleanHex = hexColor.replace('#', '');
+            const svgString = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="100" fill="#${cleanHex}"/><path d="M256 140c-63.7 0-116 52.3-116 116 0 16.3 3.5 31.8 9.8 45.9l-34.6 19.9C101.4 298.6 96 277.8 96 256c0-88.4 71.6-160 160-160v-48l80 72-80 72v-48zm0 232c63.7 0 116-52.3 116-116 0-16.3-3.5-31.8-9.8-45.9l34.6-19.9C410.6 213.4 416 234.2 416 256c0 88.4-71.6 160-160 160v48l-80-72 80-72v48z" fill="#ffffff"/><circle cx="256" cy="256" r="32" fill="#ffffff"/></svg>`;
+            const encodedSvg = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
+            const favicon = document.getElementById('dynamic-favicon');
+            if (favicon) {
+                favicon.href = encodedSvg;
+            }
+        }
+
+        function getComputedPrimaryColor() {
+            const temp = document.createElement('div');
+            temp.style.color = 'var(--primary-color)';
+            document.body.appendChild(temp);
+            const computedColor = window.getComputedStyle(temp).color;
+            document.body.removeChild(temp);
+            
+            // Convert RGB to HEX
+            const rgbMatch = computedColor.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+            if (rgbMatch) {
+                return "#" + ((1 << 24) + (parseInt(rgbMatch[1]) << 16) + (parseInt(rgbMatch[2]) << 8) + parseInt(rgbMatch[3])).toString(16).slice(1);
+            }
+            return "#059669";
+        }
+
+        function buildTableHTML(startNum, endNum) {
+            let html = '<table><thead><tr><th class="num-col">No</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></tr></thead><tbody>';
+            
+            for (let i = startNum; i <= endNum; i++) {
+                html += `<tr id="row-${i}">
+                    <td class="num-col">${i}</td>
+                    <td class="day-col" onclick="toggleCheck(this)"><div class="day-box"></div></td>
+                    <td class="day-col" onclick="toggleCheck(this)"><div class="day-box"></div></td>
+                    <td class="day-col" onclick="toggleCheck(this)"><div class="day-box"></div></td>
+                    <td class="day-col" onclick="toggleCheck(this)"><div class="day-box"></div></td>
+                    <td class="day-col" onclick="toggleCheck(this)"><div class="day-box"></div></td>
+                    <td class="day-col" onclick="toggleCheck(this)"><div class="day-box"></div></td>
+                    <td class="day-col" onclick="toggleCheck(this)"><div class="day-box"></div></td>
+                    <td class="day-col" onclick="toggleCheck(this)"><div class="day-box"></div></td>
+                    <td class="day-col" onclick="toggleCheck(this)"><div class="day-box"></div></td>
+                </tr>`;
+            }
+            
+            html += '</tbody></table>';
+            return html;
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('sec-1').innerHTML = buildTableHTML(1, 37);
+            document.getElementById('sec-2').innerHTML = buildTableHTML(38, 74);
+            
+            document.getElementById('sec-3').innerHTML = buildTableHTML(75, 111);
+            document.getElementById('sec-4').innerHTML = buildTableHTML(112, 148);
+            
+            document.getElementById('sec-5').innerHTML = buildTableHTML(149, 185);
+            document.getElementById('sec-6').innerHTML = buildTableHTML(186, 222);
+            
+            loadTheme();
+            loadProgress();
+            loadName();
+            loadSubject();
+            updateProgress();
+            updateFaviconColor(getComputedPrimaryColor());
+        });
+
+        function syncName(val) {
+            document.querySelectorAll('.editable-name').forEach(el => {
+                if (document.activeElement !== el) el.innerText = val;
+            });
+            localStorage.setItem('revision_plan_name', val);
+        }
+
+        function syncSubject(val) {
+            document.querySelectorAll('.editable-subject').forEach(el => {
+                if (document.activeElement !== el) el.innerText = val;
+            });
+            localStorage.setItem('revision_plan_subject', val);
+        }
+
+        function loadName() {
+            const savedName = localStorage.getItem('revision_plan_name');
+            if (savedName) document.querySelectorAll('.editable-name').forEach(el => el.innerText = savedName);
+        }
+
+        function loadSubject() {
+            const savedSubject = localStorage.getItem('revision_plan_subject');
+            if (savedSubject) document.querySelectorAll('.editable-subject').forEach(el => el.innerText = savedSubject);
+        }
+
+        function toggleCheck(cell) {
+            cell.classList.toggle('checked');
+            saveProgress();
+            updateProgress();
+        }
+
+        function saveProgress() {
+            const checkedIndices = [];
+            document.querySelectorAll('.day-col').forEach((col, idx) => {
+                if (col.classList.contains('checked')) checkedIndices.push(idx);
+            });
+            localStorage.setItem('revision_plan_checks', JSON.stringify(checkedIndices));
+        }
+
+        function loadProgress() {
+            const saved = localStorage.getItem('revision_plan_checks');
+            if (saved) {
+                try {
+                    const checkedIndices = JSON.parse(saved);
+                    const cols = document.querySelectorAll('.day-col');
+                    checkedIndices.forEach(idx => {
+                        if (cols[idx]) cols[idx].classList.add('checked');
+                    });
+                } catch (e) {
+                    console.error('Error loading progress:', e);
+                }
+            }
+        }
+
+        function updateProgress() {
+            const checkedCount = document.querySelectorAll('.day-col.checked').length;
+            const totalBoxes = 222 * 10;
+            const percentage = ((checkedCount / totalBoxes) * 100).toFixed(1);
+            document.getElementById('progressPill').innerText = `Progress: ${checkedCount} / ${totalBoxes} (${percentage}%)`;
+        }
+
+        function resetCheckmarks() {
+            if (confirm("Are you sure you want to reset all boxes? This will clear all your progress.")) {
+                document.querySelectorAll('.day-col.checked').forEach(el => el.classList.remove('checked'));
+                localStorage.removeItem('revision_plan_checks');
+                updateProgress();
+            }
+        }
+
+        function changeTheme(themeClass) {
+            document.body.className = themeClass;
+            localStorage.setItem('revision_plan_theme', themeClass);
+            updateFaviconColor(getComputedPrimaryColor());
+        }
+
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('revision_plan_theme') || 'theme-emerald';
+            document.body.className = savedTheme;
+            const select = document.getElementById('themeSelect');
+            if (select) select.value = savedTheme;
+            updateFaviconColor(getComputedPrimaryColor());
+        }
+
+        function openGuideModal() {
+            document.getElementById('guideModal').classList.add('active');
+        }
+
+        function closeGuideModal() {
+            document.getElementById('guideModal').classList.remove('active');
+        }
+    </script>
+</body>
+</html>
