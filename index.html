@@ -959,9 +959,9 @@
                     <div class="tech-block">
                         <div class="tech-block-label">🎯 ප්‍රැක්ටිස් කරන ආකාරය:</div>
                         <ol class="tech-steps-list">
-                            <li><b>Select Concept:</b> ඔබට අමාරු යැයි සිතෙන සංකීර්ණ මාතෘකාවක් තෝරාගන්න (උදා: Electromagnetic Induction).</li>
+                            <li><b>Select Concept:</b> ඔබට අමාරු යැයි තسිතෙන සංකීර්ණ මාතෘකාවක් තෝරාගන්න (උදා: Electromagnetic Induction).</li>
                             <li><b>Teach to a Child / Self:</b> කිසිදු තාක්ෂණික වචන (Technical jargon) නැතිව, ඉතා සරල උපමා (Analogies) භාවිතා කරමින් තවත් කෙනෙකුට හෝ තමන්ටම ශබ්ද නඟා පැහැදිලි කරන්න.</li>
-                            <li><b>Identify Knowledge Gaps:</b> පැහැදිලි කිරීමේදී ඔබට හිරවන, පැහැදිලි කිරීමට නොහැකි වන හෝ තාක්ෂණික වචන පිටුපස සැඟවීමට සිදුවන තැන් හඳුනාගන්න.</li>
+                            <li><b>Identify Knowledge Gaps:</b> පැහැදිලි කිරීමේදී ඔබට හිරවන, පැහැදිලි කිරීමට නොහැකි වන හෝ තාක්ෂණික වචන පිටුපස සැඟවීමට සිදුවುವ තැන් හඳුනාගන්න.</li>
                             <li><b>Refine & Simplify:</b> නැවත ප්‍රධාන පෙළපොත හෝ සටහන් වෙත ගොස් එම හිරවුණු කොටස නැවත අධ්‍යයනය කර, නැවත සරලව පැහැදිලි කරන තෙක් පුහුණු වන්න.</li>
                         </ol>
                     </div>
@@ -1053,6 +1053,7 @@
             for (let i = startNum; i <= endNum; i++) {
                 html += `<tr id="row-${i}">
                     <td class="num-col">${i}</td>
+                    <td class="day-col" onclick="toggleCheck(this)"><div class="day-box"></div></td>
                     <td class="day-col" onclick="toggleCheck(this)"><div class="day-box"></div></td>
                     <td class="day-col" onclick="toggleCheck(this)"><div class="day-box"></div></td>
                     <td class="day-col" onclick="toggleCheck(this)"><div class="day-box"></div></td>
