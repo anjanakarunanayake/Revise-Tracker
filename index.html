@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Revise Plan & Tracker</title>
-    <!-- Dynamic Favicon -->
     <link id="dynamic-favicon" rel="icon" type="image/jpeg" href="https://placehold.co/128x128/059669/ffffff?text=RP">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -100,68 +99,159 @@
             font-weight: 600;
         }
 
-        .no-print-bar {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(15, 23, 42, 0.94);
-            backdrop-filter: blur(8px);
+        .sidebar-toggle-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 101;
+            background: rgba(15, 23, 42, 0.9);
             color: white;
-            padding: 12px 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            border: none;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
             display: flex;
-            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: all 0.25s ease;
+        }
+
+        .sidebar-toggle-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 150;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .sidebar-drawer {
+            position: fixed;
+            top: 0;
+            left: -320px;
+            width: 300px;
+            height: 100vh;
+            background: #0f172a;
+            color: white;
+            z-index: 160;
+            box-shadow: 5px 0 25px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            transition: left 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .sidebar-drawer.active {
+            left: 0;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid #1e293b;
+            display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: center;
-            gap: 12px;
         }
 
-        .bar-title {
-            font-weight: 800;
+        .sidebar-title {
             font-size: 16px;
+            font-weight: 800;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            color: #f8fafc;
         }
 
-        .bar-controls {
+        .sidebar-close {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            font-size: 22px;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 6px;
+            transition: color 0.2s;
+        }
+
+        .sidebar-close:hover {
+            color: white;
+        }
+
+        .sidebar-content {
+            padding: 20px;
+            overflow-y: auto;
             display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 10px;
+            flex-direction: column;
+            gap: 20px;
+            flex-grow: 1;
+        }
+
+        .sidebar-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .sidebar-label {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: #64748b;
+            letter-spacing: 0.5px;
         }
 
         .btn {
-            padding: 8px 14px;
+            padding: 10px 14px;
             font-size: 13px;
             font-weight: 700;
-            border-radius: 6px;
+            border-radius: 8px;
             border: none;
             cursor: pointer;
             transition: all 0.2s ease;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            justify-content: flex-start;
+            gap: 8px;
+            width: 100%;
+            text-align: left;
         }
 
         .btn-primary {
-            background-color: #2563eb;
+            background-color: var(--primary-color);
             color: white;
-            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            justify-content: center;
         }
 
         .btn-primary:hover {
-            background-color: #1d4ed8;
+            filter: brightness(1.1);
             transform: translateY(-1px);
         }
 
         .btn-secondary {
-            background-color: #334155;
-            color: white;
+            background-color: #1e293b;
+            color: #f8fafc;
+            border: 1px solid #334155;
         }
 
         .btn-secondary:hover {
-            background-color: #475569;
+            background-color: #334155;
         }
 
         .btn-info {
@@ -174,30 +264,42 @@
         }
 
         .theme-select {
-            padding: 7px 10px;
-            border-radius: 6px;
-            border: 1px solid #475569;
+            padding: 9px 12px;
+            border-radius: 8px;
+            border: 1px solid #334155;
             background: #1e293b;
             color: white;
             font-size: 13px;
             font-weight: 600;
             cursor: pointer;
+            width: 100%;
         }
 
-        .progress-pill {
+        .sidebar-progress-box {
             background: #1e293b;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
+            padding: 14px;
+            border-radius: 10px;
             border: 1px solid #334155;
-            display: inline-flex;
-            align-items: center;
+            display: flex;
+            flex-direction: column;
             gap: 6px;
         }
 
+        .sidebar-progress-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: #94a3b8;
+            text-transform: uppercase;
+        }
+
+        .sidebar-progress-value {
+            font-size: 15px;
+            font-weight: 800;
+            color: #f8fafc;
+        }
+
         .page-wrapper {
-            padding: 15px 0 30px 0;
+            padding: 25px 0 30px 0;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -401,7 +503,6 @@
             align-items: center;
         }
 
-        /* Modal Styles */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -434,6 +535,90 @@
             padding: 26px;
             box-shadow: 0 25px 30px -5px rgba(0, 0, 0, 0.25);
             position: relative;
+        }
+
+        /* Exam Countdown Popup Specific Styles */
+        .exam-popup-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 520px;
+            padding: 30px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+            border: 3px solid var(--primary-color);
+            text-align: center;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modal-overlay.active .exam-popup-card {
+            transform: scale(1);
+        }
+
+        .exam-badge-top {
+            background: var(--primary-color);
+            color: white;
+            font-size: 11.5px;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 6px 16px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .exam-popup-title {
+            font-size: 22px;
+            font-weight: 900;
+            color: #0f172a;
+            margin: 0 0 8px 0;
+        }
+
+        .exam-date-text {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 22px;
+        }
+
+        .countdown-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .countdown-box {
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px 6px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+
+        .countdown-number {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--primary-dark);
+            line-height: 1.1;
+        }
+
+        .countdown-label {
+            font-size: 11px;
+            font-weight: 800;
+            color: #64748b;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        .exam-popup-footer {
+            font-size: 13px;
+            font-weight: 700;
+            color: #334155;
+            margin-bottom: 20px;
+            line-height: 1.5;
         }
 
         .modal-header {
@@ -647,15 +832,11 @@
 
         /* Responsive */
         @media screen and (max-width: 768px) {
-            .no-print-bar {
-                flex-direction: column;
-                align-items: stretch;
-                padding: 10px 12px;
-                gap: 8px;
-            }
-            .bar-controls {
-                justify-content: space-between;
-                width: 100%;
+            .sidebar-toggle-btn {
+                top: 10px;
+                left: 10px;
+                width: 38px;
+                height: 38px;
             }
             .page-wrapper {
                 padding: 10px 8px;
@@ -680,6 +861,9 @@
             }
             .modal-card {
                 padding: 16px;
+            }
+            .countdown-number {
+                font-size: 19px;
             }
         }
 
@@ -712,25 +896,50 @@
 </head>
 <body class="theme-emerald">
 
-    <div class="no-print-bar">
-        <div class="bar-title">
-            <span>📅 Revise Plan & Tracker</span>
-            <span class="progress-pill" id="progressPill">Progress: 0 / 2220 (0%)</span>
+    <button class="sidebar-toggle-btn" onclick="toggleSidebar()" title="Open Menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <div class="sidebar-drawer" id="sidebarDrawer">
+        <div class="sidebar-header">
+            <div class="sidebar-title">
+                <span>📅 Revise Plan Menu</span>
+            </div>
+            <button class="sidebar-close" onclick="toggleSidebar()">&times;</button>
         </div>
-        <div class="bar-controls">
-            <select id="themeSelect" class="theme-select" onchange="changeTheme(this.value)">
-                <option value="theme-emerald">Emerald Green</option>
-                <option value="theme-blue">Ocean Blue</option>
-                <option value="theme-pink">Rose Pink</option>
-                <option value="theme-indigo">Indigo</option>
-                <option value="theme-slate">Classic Slate</option>
-            </select>
-            <button class="btn btn-info" onclick="openGuideModal()">💡 Revise Guide</button>
-            <button class="btn btn-secondary" onclick="resetCheckmarks()">Reset Checks</button>
-            <button class="btn btn-primary" onclick="window.print()">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-                Save as PDF / Print
-            </button>
+        <div class="sidebar-content">
+            <div class="sidebar-progress-box">
+                <span class="sidebar-progress-title">Current Progress</span>
+                <span class="sidebar-progress-value" id="progressPill">0 / 2220 (0%)</span>
+            </div>
+
+            <div class="sidebar-group">
+                <span class="sidebar-label">Appearance</span>
+                <select id="themeSelect" class="theme-select" onchange="changeTheme(this.value)">
+                    <option value="theme-emerald">Emerald Green</option>
+                    <option value="theme-blue">Ocean Blue</option>
+                    <option value="theme-pink">Rose Pink</option>
+                    <option value="theme-indigo">Indigo</option>
+                    <option value="theme-slate">Classic Slate</option>
+                </select>
+            </div>
+
+            <div class="sidebar-group">
+                <span class="sidebar-label">Quick Tools</span>
+                <button class="btn btn-info" onclick="openExamPopup(); toggleSidebar();">⏳ Exam Countdown</button>
+                <button class="btn btn-info" onclick="openGuideModal(); toggleSidebar();">💡 Revise Guide</button>
+            </div>
+
+            <div class="sidebar-group">
+                <span class="sidebar-label">Actions</span>
+                <button class="btn btn-secondary" onclick="resetCheckmarks()">Reset Checks</button>
+                <button class="btn btn-primary" onclick="window.print()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                    Save as PDF / Print
+                </button>
+            </div>
         </div>
     </div>
 
@@ -820,7 +1029,41 @@
 
     </div>
 
-    <!-- Revise Guide Modal -->
+    <div class="modal-overlay active" id="examPopupModal">
+        <div class="exam-popup-card">
+            <div class="exam-badge-top">🎯 විභාග ඉලක්කය</div>
+            <h2 class="exam-popup-title">විභාගයට තව ඉතිරි කාලය</h2>
+            <div class="exam-date-text">📅 ඉලක්කගත දිනය: 03 August 2027</div>
+            
+            <div class="countdown-grid">
+                <div class="countdown-box">
+                    <div class="countdown-number" id="cdDays">00</div>
+                    <div class="countdown-label">දින</div>
+                </div>
+                <div class="countdown-box">
+                    <div class="countdown-number" id="cdHours">00</div>
+                    <div class="countdown-label">පැය</div>
+                </div>
+                <div class="countdown-box">
+                    <div class="countdown-number" id="cdMins">00</div>
+                    <div class="countdown-label">මිනි</div>
+                </div>
+                <div class="countdown-box">
+                    <div class="countdown-number" id="cdSecs">00</div>
+                    <div class="countdown-label">තත්</div>
+                </div>
+            </div>
+
+            <p class="exam-popup-footer">
+                "ජයග්‍රහණය අහම්බෙන් ලැබෙන්නක් නොවේ; එය නිවැරදි සැලසුමක සහ අඛණ්ඩ කැපවීමක ප්‍රතිඵලයකි!"
+            </p>
+
+            <button class="btn btn-primary" style="width: 100%; justify-content: center; padding: 12px; font-size: 14px;" onclick="closeExamPopup()">
+                🚀 වැඩ කටයුතු අරඹමු (Let's Go!)
+            </button>
+        </div>
+    </div>
+
     <div class="modal-overlay" id="guideModal">
         <div class="modal-card">
             <div class="modal-header">
@@ -1021,7 +1264,29 @@
         </div>
     </div>
 
+    <!-- Custom Message Box Modal (Replacing confirm/alert) -->
+    <div class="modal-overlay" id="customMsgModal">
+        <div class="exam-popup-card" style="max-width: 400px;">
+            <div class="exam-badge-top" id="msgModalBadge">අවධානයට</div>
+            <h3 class="exam-popup-title" id="msgModalTitle" style="font-size: 18px;">තහවුරු කිරීම</h3>
+            <p class="exam-popup-footer" id="msgModalText" style="margin: 15px 0 20px 0;">
+                ඔබට සියලුම කොටු (Reset) කිරීමට අවශ්‍ය බව විශ්වාසද?
+            </p>
+            <div style="display: flex; gap: 10px;" id="msgModalButtons">
+                <button class="btn btn-secondary" style="flex: 1; justify-content: center;" onclick="closeCustomMsg(false)">නැත (Cancel)</button>
+                <button class="btn btn-primary" style="flex: 1; justify-content: center;" onclick="closeCustomMsg(true)">ඔව් (Yes)</button>
+            </div>
+        </div>
+    </div>
+
     <script>
+        function toggleSidebar() {
+            const drawer = document.getElementById('sidebarDrawer');
+            const overlay = document.getElementById('sidebarOverlay');
+            drawer.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
         function updateFaviconColor(hexColor) {
             const cleanHex = hexColor.replace('#', '');
             const svgString = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="100" fill="#${cleanHex}"/><path d="M256 140c-63.7 0-116 52.3-116 116 0 16.3 3.5 31.8 9.8 45.9l-34.6 19.9C101.4 298.6 96 277.8 96 256c0-88.4 71.6-160 160-160v-48l80 72-80 72v-48zm0 232c63.7 0 116-52.3 116-116 0-16.3-3.5-31.8-9.8-45.9l34.6-19.9C410.6 213.4 416 234.2 416 256c0 88.4-71.6 160-160 160v48l-80-72 80-72v48z" fill="#ffffff"/><circle cx="256" cy="256" r="32" fill="#ffffff"/></svg>`;
@@ -1039,7 +1304,6 @@
             const computedColor = window.getComputedStyle(temp).color;
             document.body.removeChild(temp);
             
-            // Convert RGB to HEX
             const rgbMatch = computedColor.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
             if (rgbMatch) {
                 return "#" + ((1 << 24) + (parseInt(rgbMatch[1]) << 16) + (parseInt(rgbMatch[2]) << 8) + parseInt(rgbMatch[3])).toString(16).slice(1);
@@ -1070,6 +1334,31 @@
             return html;
         }
 
+        // Live Exam Countdown Timer Logic for 03 August 2027
+        function updateExamCountdown() {
+            const examDate = new Date('August 3, 2027 00:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = examDate - now;
+
+            if (distance < 0) {
+                document.getElementById('cdDays').innerText = '00';
+                document.getElementById('cdHours').innerText = '00';
+                document.getElementById('cdMins').innerText = '00';
+                document.getElementById('cdSecs').innerText = '00';
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const secs = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('cdDays').innerText = String(days).padStart(2, '0');
+            document.getElementById('cdHours').innerText = String(hours).padStart(2, '0');
+            document.getElementById('cdMins').innerText = String(mins).padStart(2, '0');
+            document.getElementById('cdSecs').innerText = String(secs).padStart(2, '0');
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
             document.getElementById('sec-1').innerHTML = buildTableHTML(1, 37);
             document.getElementById('sec-2').innerHTML = buildTableHTML(38, 74);
@@ -1086,6 +1375,10 @@
             loadSubject();
             updateProgress();
             updateFaviconColor(getComputedPrimaryColor());
+
+            // Start Countdown Timer
+            updateExamCountdown();
+            setInterval(updateExamCountdown, 1000);
         });
 
         function syncName(val) {
@@ -1145,15 +1438,39 @@
             const checkedCount = document.querySelectorAll('.day-col.checked').length;
             const totalBoxes = 222 * 10;
             const percentage = ((checkedCount / totalBoxes) * 100).toFixed(1);
-            document.getElementById('progressPill').innerText = `Progress: ${checkedCount} / ${totalBoxes} (${percentage}%)`;
+            document.getElementById('progressPill').innerText = `${checkedCount} / ${totalBoxes} (${percentage}%)`;
+        }
+
+        let customMsgCallback = null;
+
+        function showCustomConfirm(title, text, callback) {
+            document.getElementById('msgModalTitle').innerText = title;
+            document.getElementById('msgModalText').innerText = text;
+            document.getElementById('msgModalButtons').style.display = 'flex';
+            document.getElementById('customMsgModal').classList.add('active');
+            customMsgCallback = callback;
+        }
+
+        function closeCustomMsg(result) {
+            document.getElementById('customMsgModal').classList.remove('active');
+            if (customMsgCallback) {
+                customMsgCallback(result);
+                customMsgCallback = null;
+            }
         }
 
         function resetCheckmarks() {
-            if (confirm("Are you sure you want to reset all boxes? This will clear all your progress.")) {
-                document.querySelectorAll('.day-col.checked').forEach(el => el.classList.remove('checked'));
-                localStorage.removeItem('revision_plan_checks');
-                updateProgress();
-            }
+            showCustomConfirm(
+                'දත්ත ඉවත් කිරීම (Reset)',
+                'ඔබට සියලුම කොටු (Reset) කිරීමට අවශ්‍ය බව විශ්වාසද? මෙමගින් ඔබ සලකුණු කළ සියලු ප්‍රගතිය මකී යනු ඇත.',
+                (confirmed) => {
+                    if (confirmed) {
+                        document.querySelectorAll('.day-col.checked').forEach(el => el.classList.remove('checked'));
+                        localStorage.removeItem('revision_plan_checks');
+                        updateProgress();
+                    }
+                }
+            );
         }
 
         function changeTheme(themeClass) {
@@ -1168,6 +1485,14 @@
             const select = document.getElementById('themeSelect');
             if (select) select.value = savedTheme;
             updateFaviconColor(getComputedPrimaryColor());
+        }
+
+        function openExamPopup() {
+            document.getElementById('examPopupModal').classList.add('active');
+        }
+
+        function closeExamPopup() {
+            document.getElementById('examPopupModal').classList.remove('active');
         }
 
         function openGuideModal() {
